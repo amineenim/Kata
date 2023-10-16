@@ -14,6 +14,7 @@ import java.util.Map;
 @Api(value = "Players Service API", tags = "Operations related to Players management")
 public class PlayerServiceController {
 
+
     private long nextId = 1;
     private static final Map<Long, Player> players = new HashMap<Long, Player>() {
 
