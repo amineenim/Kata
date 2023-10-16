@@ -7,7 +7,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netflix.discovery.converters.Auto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -26,6 +29,15 @@ import java.util.Objects;
 @Api(value = "Stats Service API", tags = "operations related to getting statisctics for team or player")
 public class statsServiceController {
 
+    @LoadBalanced
+    @Bean
+    RestTemplate restTemplate(){
+        return new RestTemplate();
+    }
+
+    @Autowired
+    RestTemplate restTemplate;
+
     @Autowired
     TeamServiceDelegate teamServiceDelegate;
 
@@ -34,6 +46,12 @@ public class statsServiceController {
 
     @ApiOperation(value = "Get Statistics for a team by Id", response = String.class)
     @GetMapping("/team-stats/{teamId}")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success !"),
+            @ApiResponse(code = 401, message = "Not Authorized!"),
+            @ApiResponse(code = 403, message = "Forbidden!"),
+            @ApiResponse(code = 404, message = "Not Found!")
+    })
     public String getTeamStats(@PathVariable Long teamId) {
         // Check for team existence by calling TeamServiceDelegate
         String response = teamServiceDelegate.callTeamServiceAndCheckTeamExists(teamId);
@@ -57,6 +75,13 @@ public class statsServiceController {
     }
 
     @GetMapping("/player-stats/{playerId}")
+    @ApiOperation(value = "Get player statistics", response = String.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success|OK"),
+            @ApiResponse(code = 401, message = "Not authorized!"),
+            @ApiResponse(code = 403, message = "Forbidden!!!"),
+            @ApiResponse(code = 404, message = "Not found!!!")
+    })
     public String getPlayerStats(@PathVariable Long playerId) {
         // Implement logic to retrieve and return player statistics by playerId.
         // You can return a JSON or any format suitable for your application.
