@@ -10,7 +10,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //
 @SpringBootApplication
 @EnableEurekaServer
-@EnableAdminServer
 public class EurekaServerApplication {
 
     public static void main(String[] args) {
