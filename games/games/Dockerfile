@@ -11,4 +11,4 @@ COPY target/match-service-0.0.1-SNAPSHOT.jar match-service.jar
 EXPOSE 8020
 
 # Commande pour lancer l'application lorsque le conteneur démarre
-CMD ["java", "-jar", "match-service.jar"]
+CMD ["java", "-jar", "game-service.jar"]
