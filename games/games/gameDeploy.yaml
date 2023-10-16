@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: GameService
+  labels:
+    app: GameService
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: GameService
+  template:
+    metadata:
+      labels:
+        app: GameService
+    spec:
+      containers:
+        - name: GameService
+          image: GameService:latest
+          ports:
+            - containerPort: 8020

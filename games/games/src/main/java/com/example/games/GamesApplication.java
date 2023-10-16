@@ -10,7 +10,6 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 
 @SpringBootApplication
-@EnableEurekaClient
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableDiscoveryClient
