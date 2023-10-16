@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teamService
+  labels:
+    app: teamService
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teamService
+  template:
+    metadata:
+      labels:
+        app: teamService
+    spec:
+      containers:
+        - name: teamService
+          image: teamService:latest
+          ports:
+            - containerPort: 8012
